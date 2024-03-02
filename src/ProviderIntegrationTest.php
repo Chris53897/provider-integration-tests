@@ -49,7 +49,7 @@ abstract class ProviderIntegrationTest extends TestCase
     /**
      * @return Provider that is used in the tests.
      */
-    abstract protected function createProvider(ClientInterface $httpClient);
+    abstract protected function createProvider(ClientInterface $httpClient): Provider;
 
     /**
      * @return string the directory where cached responses are stored
@@ -62,8 +62,6 @@ abstract class ProviderIntegrationTest extends TestCase
     abstract protected function getApiKey(): string;
 
     /**
-     * @param ResponseInterface $response
-     *
      * @return ClientInterface&MockObject
      */
     private function getHttpClient(ResponseInterface $response)
@@ -111,7 +109,6 @@ abstract class ProviderIntegrationTest extends TestCase
         $result = $provider->geocodeQuery($query);
         $this->assertWellFormattedResult($result);
 
-        /** @var Location $location */
         $location = $result->first();
         /** @var Coordinates|null $coordinates */
         $coordinates = $location->getCoordinates();

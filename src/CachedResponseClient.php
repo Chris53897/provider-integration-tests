@@ -23,39 +23,11 @@ use Psr\Http\Message\ResponseInterface;
  */
 class CachedResponseClient implements ClientInterface
 {
-    /**
-     * @var ClientInterface
-     */
-    private $delegate;
-
-    /**
-     * @var null|string
-     */
-    private $apiKey;
-
-    /**
-     * @var null|string
-     */
-    private $appCode;
-
-    /**
-     * @var string
-     */
-    private $cacheDir;
-
-    /**
-     * @param ClientInterface $delegate
-     * @param string          $cacheDir
-     * @param string|null     $apiKey
-     * @param string|null     $appCode
-     */
-    public function __construct(ClientInterface $delegate, $cacheDir, $apiKey = null, $appCode = null)
-    {
-        $this->delegate = $delegate;
-        $this->cacheDir = $cacheDir;
-        $this->apiKey = $apiKey;
-        $this->appCode = $appCode;
-    }
+    public function __construct(private ClientInterface $delegate,
+                                private string          $cacheDir,
+                                private ?string         $apiKey = null,
+                                private ?string          $appCode = null)
+    {}
 
     /**
      * {@inheritdoc}

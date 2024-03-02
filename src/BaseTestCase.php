@@ -23,10 +23,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 abstract class BaseTestCase extends TestCase
 {
-    /**
-     * @return string|null the directory where cached responses are stored
-     */
-    abstract protected function getCacheDir();
+    abstract protected function getCacheDir(): ?string;
 
     /**
      * Get a real HTTP client. If a cache dir is set to a path it will use cached responses.
